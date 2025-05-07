@@ -68,8 +68,8 @@ pip install -e .
 
 ## Usage
 
-Run the ETL process:
-python run_etl.py
+Run the main script:
+python scripts/main.py
 
 Or run individual components:
 python scripts/extract.py  # Run only the extraction phase
