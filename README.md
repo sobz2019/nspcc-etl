@@ -15,7 +15,7 @@ This project implements a modular ETL pipeline for the National Society for the 
 - **Performance Tracking**: Monitors processing time and record counts
 
 ## Project Structure
-
+```
 nspcc_etl/
 ├── config/
 │   ├── init.py
@@ -38,7 +38,7 @@ nspcc_etl/
 ├── run_etl.py            # Entry point script
 ├── setup.py              # Package installation script
 └── requirements.txt      # Dependencies
-
+```
 
 
 ## Data Model
