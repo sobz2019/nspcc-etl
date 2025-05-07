@@ -51,6 +51,8 @@ The ETL process loads data into a star schema with the following tables:
 - **dim_payment_method**: Payment method Dimension
 - **dim_date**: Date dimension table
 
+ - **file_error_logging**: File Processing Log Error Tracking Table
+
 ## Installation
 
 1. Clone the repository:
@@ -73,3 +75,49 @@ Or run individual components:
 python scripts/extract.py  # Run only the extraction phase
 python scripts/transform.py  # Run only the transformation phase
 python scripts/load.py  # Run only the loading phase
+
+
+
+### Analytical Questions Addressed
+
+1. **Unique Donors**: Count of unique individuals who made donations
+2. **Donation Metrics**: Total and average donation amount calculations
+3. **Donor Characteristics Analysis**: Correlation between user profiles and donation patterns
+4. **Failed Payments**: Count and analysis of failed donation payments
+5. **Geographic Distribution**: Proportion of donations from London vs. outside London
+
+### Analytics Implementation
+
+The ETL pipeline specifically:
+
+1. Extracts donation data from JSON files
+2. Identifies and flags London-based donations using the region field
+3. Transforms customer profile data to enable demographic analysis
+4. Loads data into a dimensional model optimized for analytical queries
+5. Tracks payment status to enable failed payment analysis
+
+Once loaded, analysts can run queries like:
+
+```sql
+-- Count unique donors
+SELECT COUNT(DISTINCT customer_key) FROM fact_donations;
+
+-- Total and average donation amounts
+SELECT SUM(amount), AVG(amount) FROM fact_donations WHERE status = 'success';
+
+-- Donations by region (London vs non-London)
+SELECT r.is_london, COUNT(*) as donation_count, SUM(f.amount) as total_amount
+FROM fact_donations f
+JOIN dim_region r ON f.region_key = r.region_key
+GROUP BY r.is_london;
+
+-- Failed donations count
+SELECT COUNT(*) FROM fact_donations WHERE status = 'failed';
+
+-- Donor characteristics correlation
+SELECT c.shirt_size, c.donates_to_charity, c.bikes_to_work,
+       COUNT(*) as donation_count, AVG(f.amount) as avg_donation
+FROM fact_donations f
+JOIN dim_customer c ON f.customer_key = c.customer_key
+GROUP BY c.shirt_size, c.donates_to_charity, c.bikes_to_work
+ORDER BY avg_donation DESC;
