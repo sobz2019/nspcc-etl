@@ -57,7 +57,7 @@ The ETL process loads data into a star schema with the following tables:
 
 1. Clone the repository:
 
-git clone https://github.com/YOUR-USERNAME/nspcc-etl.git
+git clone https://github.com/sobz2019/nspcc-etl.git
 cd nspcc-etl
 
 2. Install the package in development mode:
