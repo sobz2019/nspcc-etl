@@ -99,20 +99,32 @@ The ETL pipeline specifically:
 Once loaded, analysts can run queries like:
 
 ```sql
+
 -- Count unique donors
 SELECT COUNT(DISTINCT customer_key) FROM fact_donations;
 
 -- Total and average donation amounts
-SELECT SUM(amount), AVG(amount) FROM fact_donations WHERE status = 'success';
+SELECT SUM(amount) as Total_Amount, AVG(amount) as Avg_Amount FROM fact_donations 
+WHERE status = 'completed' and amount >0;
 
 -- Donations by region (London vs non-London)
-SELECT r.is_london, COUNT(*) as donation_count, SUM(f.amount) as total_amount
+SELECT 
+    CASE 
+        WHEN r.is_london = TRUE THEN 'London'
+        ELSE 'Non-London'
+    END AS region,
+    COUNT(*) AS donation_count
 FROM fact_donations f
 JOIN dim_region r ON f.region_key = r.region_key
-GROUP BY r.is_london;
+WHERE f.amount > 0
+GROUP BY 
+    CASE 
+        WHEN r.is_london = TRUE THEN 'London'
+        ELSE 'Non-London'
+    END;
 
 -- Failed donations count
-SELECT COUNT(*) FROM fact_donations WHERE status = 'failed';
+SELECT COUNT(*) FROM fact_donations WHERE status != 'failed';
 
 -- Donor characteristics correlation
 SELECT c.shirt_size, c.donates_to_charity, c.bikes_to_work,
