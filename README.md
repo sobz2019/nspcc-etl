@@ -126,7 +126,7 @@ GROUP BY
 -- Failed donations count
 SELECT COUNT(*) FROM fact_donations WHERE status != 'failed';
 
--- Donor characteristics correlation
+-- What user characteristics lead to more donations? 
 SELECT c.shirt_size, c.donates_to_charity, c.bikes_to_work,
        COUNT(*) as donation_count, AVG(f.amount) as avg_donation
 FROM fact_donations f
