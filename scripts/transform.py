@@ -7,12 +7,6 @@ logger = setup_logger('transform')
 def flatten_data(raw_data):
     """
     Flatten nested JSON data into dimensional and fact tables
-    
-    Args:
-        raw_data: List of raw data records
-    
-    Returns:
-        Tuple containing (fact_rows, dim_customers, dim_payments, dim_regions)
     """
     logger.info(f"Starting data transformation of {len(raw_data)} records")
     fact_rows, dim_customers, dim_regions, dim_payments = [], [], [], []
@@ -57,8 +51,4 @@ def flatten_data(raw_data):
                f"{len(set(r['region'] for r in dim_regions))} regions, "
                f"{len(set(p['payment_method'] for p in dim_payments))} payment methods")
     
-    # Remove duplicates from dimension tables
-    unique_regions = {r['region']: r for r in dim_regions}.values()
-    unique_payments = {p['payment_method']: p for p in dim_payments}.values()
-    
-    return fact_rows, dim_customers, list(unique_payments), list(unique_regions)
+    return fact_rows, dim_customers, dim_payments, dim_regions

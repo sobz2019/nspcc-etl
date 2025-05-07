@@ -55,15 +55,10 @@ def load_to_db(fact_rows, dim_customers, dim_payments, dim_regions):
         conn = psycopg2.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
-        # Fix #1: Remove duplicates from dimension tables before loading
-        # Use dictionary comprehension to keep only unique records based on key fields
         unique_regions = {}
         for rec in dim_regions:
             unique_regions[rec['region']] = rec
         
-        # unique_customers = {}
-        # for rec in dim_customers:
-        #     unique_customers[rec['customer_id']] = rec
         
         unique_payments = {}
         for rec in dim_payments:
