@@ -13,9 +13,6 @@ logger = setup_logger('extract')
 def load_json_files():
     """
     Load and process JSON files from the data directory
-    
-    Returns:
-        List of all data loaded from JSON files
     """
     all_data = []
     conn = psycopg2.connect(**DB_CONFIG)

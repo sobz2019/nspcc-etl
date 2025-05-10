@@ -11,12 +11,6 @@ logger = setup_logger('load')
 def insert_scd2(cursor, table, keys, record):
     """
     Insert or update a record using Slowly Changing Dimension Type 2 methodology
-    
-    Args:
-        cursor: Database cursor
-        table: Target table name
-        keys: List of key columns
-        record: Record data as dictionary
     """
     schema_table = f"{SCHEMA}.{table}"
     key_conditions = ' AND '.join([f'{k}=%s' for k in keys])

@@ -14,10 +14,6 @@ from scripts.transform import flatten_data
 from scripts.load import load_to_db
 
 def main():
-    """
-    Main ETL execution function
-    """
-    # Set up main logger with timestamp
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     logger = setup_logger(f'etl_main_{timestamp}')
     
