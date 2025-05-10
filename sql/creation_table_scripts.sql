@@ -31,8 +31,6 @@ CREATE TABLE IF NOT EXISTS nspcc.dim_date (
     day_of_week INT NOT NULL,
     day_name VARCHAR(10) NOT NULL,
     is_weekend BOOLEAN NOT NULL,
-    is_holiday BOOLEAN DEFAULT FALSE,
-    holiday_name VARCHAR(50),
     UNIQUE(full_date)
 );
 
