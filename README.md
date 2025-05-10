@@ -53,6 +53,12 @@ The ETL process loads data into a star schema with the following tables:
 
  - **file_error_logging**: File Processing Log Error Tracking Table
 
+
+#### ER Diagram
+
+![ER Diagram](./images/Table_ER_Diagram.png)
+
+
 ## Installation
 
 1. Clone the repository:
