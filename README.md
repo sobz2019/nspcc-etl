@@ -133,9 +133,22 @@ FROM fact_donations f
 JOIN dim_customer c ON f.customer_key = c.customer_key
 GROUP BY c.shirt_size, c.donates_to_charity, c.bikes_to_work
 ORDER BY avg_donation DESC;
+```
+
+### Testing
+
+This project includes a sample unit test to ensure code quality and functionality.
+
+#### Running the Tests
+
+To run the full test suite, execute the following command from the project root:
+
+```bash
+python -m unittest discover tests
+```
 
 
 
-### Analytical Dashboard
+## Analytical Dashboard
 
-![NSPCC Dashboard Overview](images/nspcc-dashboard.png)
+![NSPCC Dashboard Overview](./images/nspcc-dashboard.png)
