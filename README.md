@@ -22,7 +22,9 @@ nspcc_etl/
 │   ├── db_config.py      # Database connection settings
 │   └── settings.py       # Global settings and paths
 ├── data/                 # Input JSON files directory
+├── images/               # Images related to Diagrams
 ├── logs/                 # Log files directory
+├── notebooks/            # Notebooks used for development Purpose
 ├── scripts/
 │   ├── init.py
 │   ├── extract.py        # Data extraction module
@@ -31,6 +33,8 @@ nspcc_etl/
 │   └── main.py           # Main ETL execution script
 ├── sql/
 │   └── creation_table_scripts.sql  # Database schema creation scripts
+├── tests/
+│   └── test_transform.py  # Sample Unit test Case Validation Script
 ├── utils/
 │   ├── init.py
 │   └── logger.py         # Logging configuration
